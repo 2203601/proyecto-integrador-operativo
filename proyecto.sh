@@ -24,7 +24,8 @@
 
     case $numero in
         1)  echo "Elegiste la opción 1: Listar usuarios."
-            echo "La  fecha de hoy es: "$(date) 
+            echo "El sistema tiene los siguientes usuarios:"
+            cat /etc/passwd
              ;;
 
         2)  echo "Elegiste la opción 2: Crear usuario."
