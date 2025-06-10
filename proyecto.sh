@@ -29,27 +29,21 @@
              ;;
 
         2)  echo "Elegiste la opción 2: Crear usuario."
-            echo "Los usuarios conectados son:"
-            who
+            
             ;;
 
         3)  echo "Elegiste la opción 3: Modificar permisos de usuario"
-            echo "El espacio en el disco es de:" 
-            df -h
+           
             ;;
 
         4)  echo "Elegiste la opción 4: Modificar informacion de usuario"
-            echo "El espacio en el disco es de:" 
-            df -h
             ;;
         5)  echo "Elegiste la opción 5: Mostrar informacion de usuario"
-            echo "El espacio en el disco es de:" 
-            df -h
+            
             ;;
 
         6)  echo "Elegiste la opción 6: Cambiar password"
-            echo "El espacio en el disco es de:" 
-            df -h
+           
             ;;
 
         7) echo "Saliendo"
