@@ -9,6 +9,7 @@
 # e) Manejo de errores
 # f) Cambiar pass
 
+while [ $numero -ne 7 ]; do
 
  echo "-- GESTOR DE USUARIOS Y PERMISOS --"
 
@@ -53,3 +54,4 @@
         *) echo "Ingrese un numero entre 1 y 7"
         ;;
     esac
+done
