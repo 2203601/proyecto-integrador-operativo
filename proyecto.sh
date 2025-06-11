@@ -36,11 +36,53 @@ while [ $numero -ne 7 ]; do
             ;;
 
         3)  echo "Elegiste la opción 3: Modificar permisos de usuario"
-           
+            read -p "Nombre de usuario a modificar permisos: " usuario
+
+            if ! grep -q "^$usuario:" /etc/passwd; then
+                echo "Error: el usuario '$usuario' no existe." >&2
+                continue
+            fi
+
+            home_dir=$(getent passwd "$usuario" | cut -d: -f6)
+            if [ -z "$home_dir" ] || [ ! -d "$home_dir" ]; then
+                echo "Error: no se encontró el directorio home de '$usuario'." >&2
+                continue
+            fi
+
+            echo "Opciones de permisos para '$home_dir':"
+            echo "  1) Cambiar a 755 (rwxr-xr-x)"
+            echo "  2) Cambiar a 775 (rwxrwxr-x)"
+            echo "  3) Cambiar a 777 (rwxrwxrwx)"
+            read -p "Elige una opción (1-3): " opcion
+
+            case "$opcion" in
+                1) chmod 755 "$home_dir" ;;
+                2) chmod 775 "$home_dir" ;;
+                3) chmod 777 "$home_dir" ;;
+                *) echo "Opción inválida." >&2; continue ;;
+            esac
+
+            if [ $? -eq 0 ]; then
+                echo "Permisos modificados correctamente."
+                ls -ld "$home_dir"
+            else
+                echo "Error al cambiar los permisos." >&2
+            fi
             ;;
 
-        4)  echo "Elegiste la opción 4: Modificar informacion de usuario"
-
+        4)  echo "Elegiste la opción 4: Modificar nombre de usuario"
+            read -p "Nombre actual: " usuario
+            if ! grep -q "^$usuario:" /etc/passwd; then
+                echo "Error: el usuario '$usuario' no existe." >&2
+                continue
+            fi
+            read -p "Nuevo nombre: " nuevo_nombre
+            if grep -q "^$nuevo_nombre:" /etc/passwd; then
+                echo "Error: ya existe un usuario con ese nombre." >&2
+            else
+                sudo usermod -l "$nuevo_nombre" "$usuario"
+                echo "Usuario renombrado a '$nuevo_nombre'."
+            fi
             ;;
 
         5)  echo "Elegiste la opción 5: Mostrar informacion de usuario"
