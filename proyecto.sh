@@ -39,12 +39,25 @@ while [ $numero -ne 7 ]; do
             read user
 
             echo "Ingrese la constraseña"
-            read password
+            read -s password
+            password_encriptada=$(openssl passwd -6 "$password")
 
-            useradd -c "$nombre" -m "$user" -p "$password"
+            # chequeo de q no exista el user
+            if id "$user" &>/dev/null; then
+                echo "Error: El usuario '$user' ya existe."
+                 continue
+            fi
 
-            echo "Usuario $user creado correctamente."
+            if useradd -c "$nombre" -m "$user" -p "$password_encriptada"; then
 
+                echo "Usuario $user creado correctamente."
+            else
+                echo "error al crear el usuario"
+                continue
+            fi
+
+            usermod -aG sudo "$user"
+   
             ;;
 
         3)  echo "Elegiste la opción 3: Modificar permisos de usuario"
