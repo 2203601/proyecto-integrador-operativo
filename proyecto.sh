@@ -1,3 +1,4 @@
+#!/bin/bash
 # Los estudiantes deberán utilizar los comandos aprendidos en las diferentes guías prácticas para crear
 # automatizaciones mediante shell scripting.
  
