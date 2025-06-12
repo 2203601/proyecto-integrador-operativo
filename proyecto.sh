@@ -32,7 +32,19 @@ while [ $numero -ne 7 ]; do
              ;;
 
         2)  echo "Elegiste la opción 2: Crear usuario."
-            
+            echo "Ingrese su nombre:"
+            read nombre
+
+            echo "Ingrese nombre de usuario"
+            read user
+
+            echo "Ingrese la constraseña"
+            read password
+
+            useradd -c "$nombre" -m "$user" -p "$password"
+
+            echo "Usuario $user creado correctamente."
+
             ;;
 
         3)  echo "Elegiste la opción 3: Modificar permisos de usuario"
